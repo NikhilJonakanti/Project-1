@@ -1,14 +1,11 @@
 FROM nginx:latest
 
-# Set working directory to Nginx web root
-WORKDIR /usr/share/nginx/html
+EXPOSE 8010
 
-# Copy project files from the build context
-COPY . .
+RUN mkdir -p /etc/nginx
 
-# Expose port 80 for web access
-EXPOSE 80
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY . /usr/share/nginx/html
 
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
